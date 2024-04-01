@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="10" passed="10" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2024-04-01T11:18:16 MSK" name="Surefire suite" finished-at="2024-04-01T11:18:16 MSK" duration-ms="68">
+    <groups>
+    </groups>
+    <test started-at="2024-04-01T11:18:16 MSK" name="Surefire test" finished-at="2024-04-01T11:18:16 MSK" duration-ms="68">
+      <class name="org.example.CalculatorTests">
+        <test-method signature="testAdd()[pri:0, instance:org.example.CalculatorTests@76f4b65]" started-at="2024-04-01T11:18:16 MSK" name="testAdd" finished-at="2024-04-01T11:18:16 MSK" duration-ms="12" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testAdd -->
+        <test-method signature="testDiv()[pri:0, instance:org.example.CalculatorTests@76f4b65]" started-at="2024-04-01T11:18:16 MSK" name="testDiv" finished-at="2024-04-01T11:18:16 MSK" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testDiv -->
+        <test-method signature="testDivByZero()[pri:0, instance:org.example.CalculatorTests@76f4b65]" started-at="2024-04-01T11:18:16 MSK" name="testDivByZero" finished-at="2024-04-01T11:18:16 MSK" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testDivByZero -->
+        <test-method signature="testFindSquareRoot()[pri:0, instance:org.example.CalculatorTests@76f4b65]" started-at="2024-04-01T11:18:16 MSK" name="testFindSquareRoot" finished-at="2024-04-01T11:18:16 MSK" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testFindSquareRoot -->
+        <test-method signature="testMult()[pri:0, instance:org.example.CalculatorTests@76f4b65]" started-at="2024-04-01T11:18:16 MSK" name="testMult" finished-at="2024-04-01T11:18:16 MSK" duration-ms="2" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMult -->
+        <test-method signature="testFindSquareRootZero()[pri:0, instance:org.example.CalculatorTests@76f4b65]" started-at="2024-04-01T11:18:16 MSK" name="testFindSquareRootZero" finished-at="2024-04-01T11:18:16 MSK" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testFindSquareRootZero -->
+        <test-method signature="testPow()[pri:0, instance:org.example.CalculatorTests@76f4b65]" started-at="2024-04-01T11:18:16 MSK" name="testPow" finished-at="2024-04-01T11:18:16 MSK" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testPow -->
+        <test-method signature="testSquareRootNegativeNumber()[pri:0, instance:org.example.CalculatorTests@76f4b65]" started-at="2024-04-01T11:18:16 MSK" name="testSquareRootNegativeNumber" finished-at="2024-04-01T11:18:16 MSK" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testSquareRootNegativeNumber -->
+        <test-method signature="testPowWithDegreeZero()[pri:0, instance:org.example.CalculatorTests@76f4b65]" started-at="2024-04-01T11:18:16 MSK" name="testPowWithDegreeZero" finished-at="2024-04-01T11:18:16 MSK" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testPowWithDegreeZero -->
+        <test-method signature="testSub()[pri:0, instance:org.example.CalculatorTests@76f4b65]" started-at="2024-04-01T11:18:16 MSK" name="testSub" finished-at="2024-04-01T11:18:16 MSK" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testSub -->
+      </class> <!-- org.example.CalculatorTests -->
+    </test> <!-- Surefire test -->
+  </suite> <!-- Surefire suite -->
+</testng-results>

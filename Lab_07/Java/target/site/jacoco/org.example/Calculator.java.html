@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Calculator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">lab7Java</a> &gt; <a href="index.source.html" class="el_package">org.example</a> &gt; <span class="el_source">Calculator.java</span></div><h1>Calculator.java</h1><pre class="source lang-java linenums">package org.example;
+
+<span class="nc" id="L3">public class Calculator {</span>
+    public static double add(double number1, double number2) {
+<span class="fc" id="L5">        return number1 + number2;</span>
+    }
+
+    public static double sub(double number1, double number2) {
+<span class="fc" id="L9">        return number1 - number2;</span>
+    }
+
+    public static double mult(double number1, double number2) {
+<span class="fc" id="L13">        return number1 * number2;</span>
+    }
+
+    public static double div(double number1, double number2) {
+<span class="fc bfc" id="L17" title="All 2 branches covered.">        if (number2 == 0) {</span>
+<span class="fc" id="L18">            throw new ArithmeticException(&quot;Division by zero is not allowed.&quot;);</span>
+        }
+<span class="fc" id="L20">        return number1 / number2;</span>
+    }
+
+    public static double pow(double number1, int degree) {
+<span class="fc bfc" id="L24" title="All 2 branches covered.">        if(degree == 0)</span>
+<span class="fc" id="L25">            return 1;</span>
+<span class="fc" id="L26">        double result = number1;</span>
+<span class="fc bfc" id="L27" title="All 2 branches covered.">        for (int i = 1; i &lt; degree; i++) {</span>
+<span class="fc" id="L28">            result *= number1;</span>
+        }
+<span class="fc" id="L30">        return result;</span>
+    }
+
+    public static double findSquareRoot(double number, double epsilon) {
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        if(number &lt; 0){</span>
+<span class="fc" id="L35">            throw new ArithmeticException(&quot;A number less than zero.&quot;);</span>
+        }
+<span class="fc bfc" id="L37" title="All 2 branches covered.">        if (number == 0) {</span>
+<span class="fc" id="L38">            return 0;</span>
+        }
+
+<span class="fc" id="L41">        double guess = number / 2.0;</span>
+<span class="fc" id="L42">        double previousGuess = 0.0;</span>
+
+<span class="fc bfc" id="L44" title="All 2 branches covered.">        while (Math.abs(guess - previousGuess) &gt; epsilon) {</span>
+<span class="fc" id="L45">            previousGuess = guess;</span>
+<span class="fc" id="L46">            guess = 0.5 * (guess + number / guess);</span>
+        }
+
+<span class="fc" id="L49">        return guess;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
