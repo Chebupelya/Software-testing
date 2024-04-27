@@ -1,0 +1,6 @@
+pages\CustomCondition.class
+pages\ICanWinTestPage.class
+pages\AbstractPage.class
+pages\CustomCondition$1.class
+tests\ICanWinTest.class
+pages\CustomCondition$2.class
