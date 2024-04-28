@@ -1,50 +1,113 @@
-﻿using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-
-namespace TestSecond.Tests
+﻿namespace Lab10
 {
-    [TestFixture]
     public class KufarTests
     {
-        private IWebDriver driver;
+        User user = UserCreator.UserWitchInfoFromFile();
+        Data data = new Data();
+        private Steps steps = new Steps();
 
         [SetUp]
-        public void Setup()
+        public void Init()
         {
-            driver = new ChromeDriver();
-            driver.Navigate().GoToUrl("https://kufar.by");
-            // Тут должна быть логика для входа в аккаунт
-        }
-
-        [Test]
-        public void ChangeUserNameTest()
-        {
-            var homePage = new HomePage(driver);
-            var profilePage = homePage.ClickProfileIcon();
-            var settingsPage = profilePage.GoToSettings();
-            settingsPage.EnterName(@"\(^_^)/");
-            settingsPage.SaveChanges();
-
-            // Здесь должна быть проверка успешности изменения имени
-        }
-
-        [Test]
-        public void ChangeUserBirthdateTest()
-        {
-            var homePage = new HomePage(driver);
-            var profilePage = homePage.ClickProfileIcon();
-            var settingsPage = profilePage.GoToSettings();
-            //settingsPage.EnterBirthdate("23.02.2025");
-            settingsPage.SaveChanges();
-
-            // Здесь должна быть проверка успешности изменения даты рождения
+            steps.InitBrowser();
         }
 
         [TearDown]
-        public void Teardown()
+        public void Cleanup()
         {
-            driver.Quit();
+            steps.CloseBrowser();
+        }
+
+        [Test]
+        public void EnteringSpecialCharactersInTheUserName()
+        {
+            steps.GoToKufarPage();
+            steps.AuthorizeUser(user);
+            steps.ClickProfileIcon();
+            steps.ClickProfileSettings();
+            steps.InputBadName();
+            steps.ClickSaveChanges();
+            Assert.IsTrue(steps.GetAccountName() == data.badName);
+        }
+        
+        [Test]
+        public void EnteringIncorrectDateOfBirthInProfile()
+        {
+            steps.GoToKufarPage();
+            steps.AuthorizeUser(user);
+            steps.ClickProfileIcon();
+            steps.ClickProfileSettings();
+            steps.InputBadDateOfBirth();
+            Assert.IsTrue(steps.GetBirthDateError() == data.birthdateerror);
+        }
+
+        [Test]
+        public void TestAddItemToFavorite()
+        {
+            steps.CloseWarninigAndAdv();
+            steps.LikeAndOpenFavoritePage(user);
+            Assert.IsTrue(steps.GetPageTitle() == data.titleGifts);
+        }
+        [Test]
+        public void TestAddItemToBasket()
+        {
+            steps.CloseWarninigAndAdvForMarket();
+            Assert.IsTrue(steps.GetMarketPageTitle() == data.correctNameTitleProduct);
+            steps.AddProductToBusketAndOpenProduct();
+            Assert.IsTrue(steps.GetMarketPageTitle() == data.correctNameTitleProduct);
+        }
+        [Test]
+        public void DisplayingProductsBySearchAndBySpecificRegion()
+        {
+            steps.CloseWarninigAndAdv();
+            steps.ChangeRegion();
+            steps.InputSearch();
+            Assert.IsTrue(steps.GetProductRegion() == data.region);
+        }
+        [Test]
+        public void CheckingTheLowerThresholdForTheNumberOfCharactersInTheDescriptionField()
+        {
+            steps.CloseWarninigAndAdv();
+            steps.OpenSubmitAndEnteringDescription(user);
+            Assert.IsTrue(Utils.GetQuantitySymbols(data.desc) == steps.GetValueFromDescription());
+        }
+
+        [Test]
+        public void EnteringLargeNumberOfCharactersInTheNameFieldAnAd()
+        {
+            steps.AuthorizeUser(user);
+            steps.PutBadSeller();
+            Assert.IsFalse(data.seller == steps.GetSeller());
+        }
+        [Test]
+        public void EnteringAnIncorrectPhoneNumberAnAd()
+        {
+
+            steps.AuthorizeUser(user);
+            steps.PutBadNumber();
+            Assert.IsFalse(data.badNumber == steps.GetNumber());
+        }
+        [Test]
+        public void SearchForProductsEnteredString()
+        {
+            steps.CloseWarninigAndAdv();
+            steps.InputSomeSearch();
+            Assert.IsTrue(steps.GetNameOfProductFromSearch() == data.someWords);
+        }
+        [Test]
+        public void FilteringProductsInTheSearch()
+        {
+            steps.CloseWarninigAndAdv();
+            steps.ClickOnFilter();
+            Assert.IsTrue(data.correctFilterName == steps.GetCurrentFilterName());
+        }
+        [Test]
+        public void DisplayingProductsByCategoryAndBySpecificRegion()
+        {
+            steps.CloseWarninigAndAdv();
+            steps.ChangeRegion();
+            steps.ClickOnFilter();
+            Assert.IsTrue(data.correctRegionAndFilter == steps.GetCurrentFilterAndRegionName());
         }
     }
 }
