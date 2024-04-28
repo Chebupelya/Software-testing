@@ -13,7 +13,7 @@ namespace Lab10
 
             try
             {
-                xmlDoc.Load("C:\\Учёба БГТУ\\3 курс\\6 семестр\\Лабораторные\\Тестирование программного обеспечения\\lab11\\TestSecond\\Input.xml");
+                xmlDoc.Load("C:\\Учёба БГТУ\\3 курс\\6 семестр\\Лабораторные\\Тестирование программного обеспечения\\Lab_10\\TestSecond\\Input.xml");
 
                 user.username = xmlDoc.SelectSingleNode("/credentials/login").InnerText;
                 user.password = xmlDoc.SelectSingleNode("/credentials/password").InnerText;
