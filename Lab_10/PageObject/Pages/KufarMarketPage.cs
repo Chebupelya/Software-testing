@@ -6,18 +6,12 @@ namespace Lab10
 {
     public class KufarMarketPage : AbstractPage
     {
-        private string url = "https://www.kufar.by/l?b2c=1&cmp=1&cnd=2&sort=lst.d&pls_source=blognewgoods&pls_medium=article&pls_campaign=newgoods_kufarmarketis_pr_31.08.22&site=kufarby&utm_source=blognewgoods&utm_medium=article&utm_campaign=newgoods_kufarmarketis_pr_31.08.22";
-        private string urlProduct = "https://www.kufar.by/item/233030986?rank=2&searchId=944575da55bbfce3d76c81065a3714092328";
-            //"https://www.kufar.by/item/164272339?rank=3&searchId=e014ad1c694b3c944be57b8f46abff2e879b";
-        
         public KufarMarketPage(IWebDriver webDriver) : base(webDriver) { }
         public override void GoToMainPage()
         {
-            driver.Navigate().GoToUrl(url);
         }
         public void GoToProductPage()
         {
-            driver.Navigate().GoToUrl(urlProduct);
         }
         public string GetPageTitle()
         {

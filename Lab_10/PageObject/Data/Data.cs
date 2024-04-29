@@ -6,6 +6,7 @@
         public string urlProduct = "https://auto.kufar.by/vi/cars/231262880?rank=129&searchId=6ea8454b6778bbd6dd24e011c2e56e365727";
         public string correctNameTitleProduct = "Охлаждение Arctic Freezer 7 X (ACFRE00088A), цена 59.50 р. купить в Минске на Куфаре - Объявление №233030986";
         public string desc = "123456789";
+        public string descColor = "#c72a3d";
         public string birthdateerror = "Ого, вы прибыли из будущего? Укажите реальную дату.";
         public string badName = "\\(^_^)/";
         public string badBirthDate = "23.02.2025";

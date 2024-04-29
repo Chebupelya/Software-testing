@@ -17,7 +17,18 @@ namespace Lab10
         private readonly By _SignInSubmitButton = By.XPath("//*[@id=\"__next\"]/div[3]/div/form/div[4]/button");
         private readonly By _ProfileIconButton = By.XPath("//div[@data-testid='user_profile_pic']/span/span");
         private readonly By _ProfileSettingsButton = By.XPath("//*[text()='Настройки']");
-
+        private readonly By _ProfileFavoritesButton = By.XPath("//*[text()='Избранное']");
+        private readonly By _FirstProductCard = By.XPath("//div[@data-name='listings']/div/div/section");
+        private readonly By _FirstProductCardName = By.XPath("//div[@data-name='listings']/div/div/section/a/div[2]/h3");
+        private readonly By _FavoriteCardName = By.XPath("//h3[@class='styles_title__F3uIe']");
+        private readonly By _BusketCardName = By.XPath("//div[@class='styles_adSubject__tPnKx']");
+        private readonly By _LikeButton = By.XPath("//div[@data-name='add_favorite_ad']");
+        private readonly By _KufarMarketCheckbox = By.XPath("//p[text()='Товары от Куфар Маркета']");
+        private readonly By _ShowAnnouncementsButton = By.XPath("//button[@data-name='filter-submit-button']");
+        private readonly By _AddToBusketButton = By.XPath("//div[@class='styles_adViewContainer__NlMUv']/button");
+        private readonly By _GoToBusketButton = By.XPath("//a[@data-cy='navigate_to_cart_button']");
+        private readonly By _PlaceAnAdButton = By.XPath("//div[@data-name='add-item-button']");
+        
 
 
         public string GetPageTitle()
@@ -46,33 +57,98 @@ namespace Lab10
             acceptButton.Click();
         }
 
+
+
         
         public void GoToProductPage()
         {
             driver.Navigate().GoToUrl(data.urlProduct);
         }
-        public void ClickLikeButton()
-        {
-            Thread.Sleep(3000);
-            driver.FindElement(By.XPath("//*[@id=\"adview_content\"]/div[1]/div[2]/div[2]/div")).Click();
-            Thread.Sleep(3000);
-        }
-        public void LoginToAccount(User user)
-        {
-            driver.FindElement(_LoginField).SendKeys(user.username);
-            driver.FindElement(_PasswordField).SendKeys(user.password);
-            driver.FindElement(_SignInSubmitButton).Click();
-            Thread.Sleep(3000);
-        }
+
         
         public void ClickProfileIcon()
         {
             driver.FindElement(_ProfileIconButton).Click();
         }
+
+        public string GetBirthDateError()
+        {
+            IWebElement spanElement = driver.FindElement(_FirstProductCardName);
+            return spanElement.Text;
+        }
+        public string ClickFirstProductCard()
+        {
+            Thread.Sleep(3000);
+            IWebElement Element = driver.FindElement(_FirstProductCardName);
+            string ElementText = Element.Text;
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementIsVisible(_FirstProductCard));
+            driver.FindElement(_FirstProductCard).Click();
+            string parentWindowHandle = driver.CurrentWindowHandle;
+            foreach (string windowHandle in driver.WindowHandles)
+            {
+                if (windowHandle != parentWindowHandle)
+                {
+                    driver.SwitchTo().Window(windowHandle);
+                    break;
+                }
+            }
+            return ElementText;
+        }
+        public void LikeProduct()
+        {
+            driver.FindElement(_LikeButton).Click();
+        }
+        public void TickKufarMarket()
+        {
+            ((IJavaScriptExecutor)driver).ExecuteScript("window.scrollBy(0, 300);");
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementIsVisible(_KufarMarketCheckbox));
+            driver.FindElement(_KufarMarketCheckbox).Click();
+        }
+        public void ShowAnnouncements()
+        {
+            driver.FindElement(_ShowAnnouncementsButton).Click();
+        }
+        public void AddToBusket()
+        {
+            driver.FindElement(_AddToBusketButton).Click();
+        }
+        public void GoToBusket()
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementIsVisible(_GoToBusketButton));
+            driver.FindElement(_GoToBusketButton).Click();
+        }
+        
+        public void PlaceAnAd()
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementIsVisible(_PlaceAnAdButton));
+            driver.FindElement(_PlaceAnAdButton).Click();
+        }
         public void ClickProfileSettings()
         {
             driver.FindElement(_ProfileSettingsButton).Click();
         }
+        
+        public void ClickProfileFavorites()
+        {
+            driver.FindElement(_ProfileFavoritesButton).Click();
+        }
+
+        public string GetFavoriteProductName()
+        {
+            IWebElement FavoriteProductName = driver.FindElement(_FavoriteCardName);
+            return FavoriteProductName.Text;
+        }
+        
+        public string GetBusketProductName()
+        {
+            IWebElement BusketProductName = driver.FindElement(_BusketCardName);
+            return BusketProductName.Text;
+        }
+
         public void ClickFavorites()
         {
             driver.FindElement(By.XPath("//*[@id=\"__next\"]/div/div[2]/div[1]")).Click();
@@ -149,12 +225,6 @@ namespace Lab10
         public void CloseWarningWindow()
         {
             driver.FindElement(By.XPath("//*[@id=\"error-portal\"]/div/div/img")).Click();
-        }
-        //*[@id="ai-form"]/div[4]/div/div[1]/div[1]/textarea
-        public void EnteringSymbolsInDescriptionField()
-        {
-            Thread.Sleep(5000);
-            driver.FindElement(By.XPath("//*[@id=\"ai-form\"]/div[4]/div/div[1]/div[1]/textarea")).SendKeys(data.desc);
         }
         
         public string GetValueField()

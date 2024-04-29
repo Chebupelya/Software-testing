@@ -21,21 +21,7 @@ namespace Lab10
             KufarPage kufarPage = new KufarPage(driver);
             kufarPage.GoToMainPage();
         }
-        public void CloseWarninigAndAdv()
-        {
-            KufarPage kufarPage = new KufarPage(driver);
-            kufarPage.ClosingPolicyAndAdvertisingWindows();
-        }
         
-        public void LikeAndOpenFavoritePage(User user)
-        {
-            KufarPage kufarPage = new KufarPage(driver);
-            kufarPage.GoToProductPage();
-            kufarPage.ClickLikeButton();
-            kufarPage.LoginToAccount(user);
-            kufarPage.ClickFavorites();
-            kufarPage.ClickFavoriteProduct();
-        }
         public string GetPageTitle()
         {
             KufarPage page = new KufarPage(driver);
@@ -76,27 +62,75 @@ namespace Lab10
             KufarPage page = new KufarPage(driver);
             return page.GetRegionOfProductPage();
         }
-        public void OpenSubmitAndEnteringDescription(User user)
-        {
-            KufarPage kufarPage = new KufarPage(driver);
-            kufarPage.ClickSignInButton();
-            kufarPage.Login(user);
-            kufarPage.EnteringSymbolsInDescriptionField();
-        }
         public string GetValueFromDescription()
         {
-            KufarPage kufarPage = new KufarPage(driver);
-            return kufarPage.GetValueField();
+            PostingAdPage postingPage = new PostingAdPage(driver);
+            return postingPage.GetValueField();
         }
         public void AuthorizeUser(User user)
         {
             KufarPage kufarPage = new KufarPage(driver);
-            kufarPage.GoToMainPage();
             kufarPage.ClosingPolicyAndAdvertisingWindows();
             kufarPage.ClickSignInButton();
             kufarPage.Login(user);
             kufarPage.CloseSecondAd();
         }
+        
+        public string OpenFirstProductCard()
+        {
+            KufarPage kufarPage = new KufarPage(driver);
+            return kufarPage.ClickFirstProductCard();
+        }
+        
+        public void LikeProduct()
+        {
+            KufarPage kufarPage = new KufarPage(driver);
+            kufarPage.LikeProduct();
+        }
+        
+        public void TickKufarMarket()
+        {
+            KufarPage kufarPage = new KufarPage(driver);
+            kufarPage.TickKufarMarket();
+        }
+        
+        public void ShowAnnouncements()
+        {
+            KufarPage kufarPage = new KufarPage(driver);
+            kufarPage.ShowAnnouncements();
+        }
+        
+        public void AddToBusket()
+        {
+            KufarPage kufarPage = new KufarPage(driver);
+            kufarPage.AddToBusket();
+        }
+        
+        public void GoToBusket()
+        {
+            KufarPage kufarPage = new KufarPage(driver);
+            kufarPage.GoToBusket();
+        }
+        
+        public void PlaceAnAd()
+        {
+            KufarPage kufarPage = new KufarPage(driver);
+            kufarPage.PlaceAnAd();
+        }
+        
+        public void InputDataLess20SymbolsInDescriptionField()
+        {
+            PostingAdPage postingPage = new PostingAdPage(driver);
+            postingPage.InputDataLess20SymbolsInDescriptionField();
+        }
+        
+        public void PostAnAd()
+        {
+            PostingAdPage postingPage = new PostingAdPage(driver);
+            postingPage.PostAnAd();
+        }
+
+
 
         public void ClickProfileIcon()
         {
@@ -108,6 +142,27 @@ namespace Lab10
             KufarPage kufarPage = new KufarPage(driver);
             kufarPage.ClickProfileSettings();
         }
+        
+        public void ClickProfileFavorites()
+        {
+            KufarPage kufarPage = new KufarPage(driver);
+            kufarPage.ClickProfileFavorites();
+        }
+        
+        public string GetFavoriteProductName()
+        {
+            KufarPage kufarPage = new KufarPage(driver);
+            return kufarPage.GetFavoriteProductName();
+        }
+        
+        public string GetBusketProductName()
+        {
+            KufarPage kufarPage = new KufarPage(driver);
+            return kufarPage.GetBusketProductName();
+        }
+
+
+
         public void ClickSaveChanges()
         {
             AccountPage accountPage = new AccountPage(driver);

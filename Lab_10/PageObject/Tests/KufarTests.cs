@@ -5,6 +5,7 @@
         User user = UserCreator.UserWitchInfoFromFile();
         Data data = new Data();
         private Steps steps = new Steps();
+        string ProductName;
 
         [SetUp]
         public void Init()
@@ -42,37 +43,49 @@
         }
 
         [Test]
-        public void TestAddItemToFavorite()
+        public void AddItemToFavorite()
         {
-            steps.CloseWarninigAndAdv();
-            steps.LikeAndOpenFavoritePage(user);
-            Assert.IsTrue(steps.GetPageTitle() == data.titleGifts);
+            steps.GoToKufarPage();
+            steps.AuthorizeUser(user);
+            ProductName = steps.OpenFirstProductCard();
+            steps.LikeProduct();
+            steps.ClickProfileIcon();
+            steps.ClickProfileFavorites();
+            Assert.IsTrue(steps.GetFavoriteProductName() == ProductName);
         }
         [Test]
-        public void TestAddItemToBasket()
+        public void AddItemToBusket()
         {
-            steps.CloseWarninigAndAdvForMarket();
-            Assert.IsTrue(steps.GetMarketPageTitle() == data.correctNameTitleProduct);
-            steps.AddProductToBusketAndOpenProduct();
-            Assert.IsTrue(steps.GetMarketPageTitle() == data.correctNameTitleProduct);
+            steps.GoToKufarPage();
+            steps.AuthorizeUser(user);
+            steps.TickKufarMarket();
+            steps.ShowAnnouncements();
+            ProductName = steps.OpenFirstProductCard();
+            steps.AddToBusket();
+            steps.GoToBusket();     
+            Assert.IsTrue(steps.GetBusketProductName() == ProductName);
         }
+
+        [Test]
+        public void CheckingTheLowerThresholdForTheNumberOfCharactersInTheDescriptionFieldInAd()
+        {
+            steps.GoToKufarPage();
+            steps.AuthorizeUser(user);
+            steps.PlaceAnAd();
+            steps.InputDataLess20SymbolsInDescriptionField();
+            steps.PostAnAd();
+            Assert.IsTrue(data.descColor == steps.GetValueFromDescription());
+        }
+
         [Test]
         public void DisplayingProductsBySearchAndBySpecificRegion()
         {
-            steps.CloseWarninigAndAdv();
             steps.ChangeRegion();
             steps.InputSearch();
             Assert.IsTrue(steps.GetProductRegion() == data.region);
         }
         [Test]
-        public void CheckingTheLowerThresholdForTheNumberOfCharactersInTheDescriptionField()
-        {
-            steps.CloseWarninigAndAdv();
-            steps.OpenSubmitAndEnteringDescription(user);
-            Assert.IsTrue(Utils.GetQuantitySymbols(data.desc) == steps.GetValueFromDescription());
-        }
 
-        [Test]
         public void EnteringLargeNumberOfCharactersInTheNameFieldAnAd()
         {
             steps.AuthorizeUser(user);
@@ -90,21 +103,18 @@
         [Test]
         public void SearchForProductsEnteredString()
         {
-            steps.CloseWarninigAndAdv();
             steps.InputSomeSearch();
             Assert.IsTrue(steps.GetNameOfProductFromSearch() == data.someWords);
         }
         [Test]
         public void FilteringProductsInTheSearch()
         {
-            steps.CloseWarninigAndAdv();
             steps.ClickOnFilter();
             Assert.IsTrue(data.correctFilterName == steps.GetCurrentFilterName());
         }
         [Test]
         public void DisplayingProductsByCategoryAndBySpecificRegion()
         {
-            steps.CloseWarninigAndAdv();
             steps.ChangeRegion();
             steps.ClickOnFilter();
             Assert.IsTrue(data.correctRegionAndFilter == steps.GetCurrentFilterAndRegionName());
