@@ -6,8 +6,6 @@ namespace Lab10
     {
         protected IWebDriver driver;
 
-        public abstract void GoToMainPage();
-
         public AbstractPage(IWebDriver webDriver)
         {
             driver = webDriver;
