@@ -63,7 +63,7 @@ namespace Lab10
         }
         public string ClickFirstProductCard()
         {
-            Thread.Sleep(3000);
+            Thread.Sleep(5000);
             IWebElement Element = driver.FindElement(_firstProductCardName);
             string ElementText = Element.Text;
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
