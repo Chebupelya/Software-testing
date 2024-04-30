@@ -29,11 +29,13 @@ namespace Lab10
         public void PostAnAd()
         {
             ((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(0, document.body.scrollHeight);");
+            Thread.Sleep(1000);
             driver.FindElement(_postAdButton).Click();
         }
         
         public string GetValueField()
         {
+            Thread.Sleep(1000);
             var element = driver.FindElement(_descriptionField);
             return element.GetCssValue("color");
         }

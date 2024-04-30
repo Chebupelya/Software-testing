@@ -31,10 +31,6 @@ namespace Lab10
         {
             if (driver == null)
             {
-                //var options = new EdgeOptions();
-                //options.AddArguments("--no-sandbox"); // Отключает режим песочницы, если это необходимо
-                //options.AddArguments("--disable-dev-shm-usage"); // Отключает использование /dev/shm
-                //options.AddArguments("--headless"); // Запуск в режиме без графического интерфейса
                 driver = new EdgeDriver();
             }
             driver.Manage().Window.Maximize();
