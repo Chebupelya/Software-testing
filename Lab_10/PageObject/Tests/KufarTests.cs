@@ -6,7 +6,7 @@ namespace Lab10
 {
     public class KufarTests
     {
-        IWebDriver driver;
+        IWebDriver? driver;
 
         KufarPage kufarPage;
         LoginPage loginPage;
@@ -31,6 +31,10 @@ namespace Lab10
         {
             if (driver == null)
             {
+                //var options = new EdgeOptions();
+                //options.AddArguments("--no-sandbox"); // Отключает режим песочницы, если это необходимо
+                //options.AddArguments("--disable-dev-shm-usage"); // Отключает использование /dev/shm
+                //options.AddArguments("--headless"); // Запуск в режиме без графического интерфейса
                 driver = new EdgeDriver();
             }
             driver.Manage().Window.Maximize();
@@ -46,7 +50,7 @@ namespace Lab10
         [TearDown]
         public void Cleanup()
         {
-            driver.Quit();
+            driver?.Quit();
             driver = null;
         }
 
