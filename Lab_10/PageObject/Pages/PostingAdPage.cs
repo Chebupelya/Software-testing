@@ -24,18 +24,23 @@ namespace Lab10
         {
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             wait.Until(ExpectedConditions.ElementIsVisible(_descriptionFieldInAd));
+            Thread.Sleep(1000);
             driver.FindElement(_descriptionFieldInAd).SendKeys(data.description);
         }
         public void PostAnAd()
         {
             ((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(0, document.body.scrollHeight);");
-            Thread.Sleep(1000);
+            Thread.Sleep(2000);
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementIsVisible(_postAdButton));
             driver.FindElement(_postAdButton).Click();
         }
         
         public string GetValueField()
         {
             Thread.Sleep(1000);
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementIsVisible(_descriptionField));
             var element = driver.FindElement(_descriptionField);
             return element.GetCssValue("color");
         }

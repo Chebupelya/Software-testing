@@ -13,6 +13,8 @@ namespace Lab10
 
         public void AddToCart()
         {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementIsVisible(_addToCartButton));
             driver.FindElement(_addToCartButton).Click();
         }
         public void GoToCart()

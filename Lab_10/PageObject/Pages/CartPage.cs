@@ -1,4 +1,6 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 
 
 namespace Lab10.Pages
@@ -11,6 +13,8 @@ namespace Lab10.Pages
 
         public string GetBusketProductName()
         {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementIsVisible(_cartProductName));
             IWebElement BusketProductName = driver.FindElement(_cartProductName);
             return BusketProductName.Text;
         }

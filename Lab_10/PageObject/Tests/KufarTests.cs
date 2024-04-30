@@ -85,7 +85,7 @@ namespace Lab10
             Assert.IsTrue(favoritesPage.GetFavoriteProductName() == productName);
         }
         [Test]
-        public void AddItemToBusket()
+        public void AddItemToCart()
         {
             kufarPage.GoToMainPage();
             kufarPage.AuthorizeUser(user, kufarPage, loginPage);

@@ -49,11 +49,15 @@ namespace Lab10
         
         public void ClickProfileIcon()
         {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementIsVisible(_profileIconButton));
             driver.FindElement(_profileIconButton).Click();
         }
 
         public string GetBirthDateError()
         {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementIsVisible(_firstProductCardName));
             IWebElement spanElement = driver.FindElement(_firstProductCardName);
             return spanElement.Text;
         }
@@ -78,6 +82,8 @@ namespace Lab10
         }
         public void LikeProduct()
         {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementIsVisible(_likeButton));
             driver.FindElement(_likeButton).Click();
         }
         public void TickKufarMarket()
@@ -89,6 +95,8 @@ namespace Lab10
         }
         public void ShowAnnouncements()
         {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementIsVisible(_showAnnouncementsButton));
             driver.FindElement(_showAnnouncementsButton).Click();
         }
         
@@ -100,17 +108,23 @@ namespace Lab10
         }
         public void ClickProfileSettings()
         {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementIsVisible(_profileSettingsButton));
             driver.FindElement(_profileSettingsButton).Click();
         }
         
         public void ClickProfileFavorites()
         {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementIsVisible(_profileFavoritesButton));
             driver.FindElement(_profileFavoritesButton).Click();
         }
 
         public void ClickSignInButton()
         {
             Thread.Sleep(3000);
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementIsVisible(_signInButton));
             driver.FindElement(_signInButton).Click();
         }
         
