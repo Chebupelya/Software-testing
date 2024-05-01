@@ -8,7 +8,7 @@
         public string birthDateError = "Ого, вы прибыли из будущего? Укажите реальную дату.";
         public string badName = "\\(^_^)/";
         public string badBirthDate = "23.02.2025";
-        public string login = "nikitailyin186@gmail.com";
-        public string password = "5022024f3N2334001504801";
+        public string login = "nikitailyin124@gmail.com";
+        public string password = "111122223333nN";
     }
 }
