@@ -25,18 +25,7 @@ namespace Lab11_12
             KufarPage kufarPage = new KufarPage(driver);
             kufarPage.ClosingPolicyAndAdvertisingWindows();
         }
-        
-        public void ChangeRegion()
-        {
-            KufarPage page = new KufarPage(driver);
-            Thread.Sleep(3000);
-            page.ChangeRegionToGrodno();
-        }
-        public void InputSearch()
-        {
-            KufarPage page = new KufarPage(driver);
-            page.InputSomeProductInSearch();
-        }
+
         public string GetProductRegion()
         {
             KufarPage page = new KufarPage(driver);

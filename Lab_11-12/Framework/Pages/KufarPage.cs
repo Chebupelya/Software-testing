@@ -24,7 +24,7 @@ namespace Lab11_12
         private readonly By _placeAnAdButton = By.XPath("//div[@data-name='add-item-button']");
         private readonly By _searchInputField = By.XPath("//input[@data-testid='searchbar-input']");
         private readonly By _magnifierIcon = By.XPath("//button[@class='styles_search_button__Ro1wM']");
-        private readonly By _searchResultsName = By.XPath("//div[@id='main-content']/div[7]/div/div/div[2]/div/h1");
+        private readonly By _searchResultsName = By.XPath("//div[@id='main-content']/div[6]/div/div/div[2]/div/h1");
         private readonly By _categoriesButton = By.XPath("//button[@data-name='category-chip']/span[text()='Категории']");
         private readonly By _subCategoryName = By.XPath("//div[@id='__next']/div/div[2]/div/div/div/div[2]");
         private readonly By _vehicleType = By.XPath("//span[text()='Микроавтобус']");
@@ -33,6 +33,10 @@ namespace Lab11_12
         private readonly By _markOption = By.XPath("//div[@data-testid='select-search-option' and text()='Volkswagen']");
         private readonly By _showButton = By.XPath("//button[@data-cy='filters-auto-submit-button' and contains(text(), 'Показать')]");
         private readonly By _searchWithFilterHeader = By.XPath("//section[@id='listings_content']/div/div/div[2]/h1");
+        private readonly By _regionField = By.XPath("//*[@id=\"header\"]/div[1]/div[3]/div/button");
+        private readonly By _regionList = By.XPath("//*[@id=\"header\"]/div[1]/div[3]/div/div/div/div[1]/div/select");
+        private readonly By _minskRegionInRegionList = By.XPath("//*[@id=\"header\"]/div[1]/div[3]/div/div/div/div[1]/div/select/option[2]");
+        private readonly By _acceptRegionButton = By.XPath("//*[@id=\"header\"]/div[1]/div[3]/div/div/div/button");
 
 
 
@@ -152,7 +156,7 @@ namespace Lab11_12
         {
             Thread.Sleep(2000);
             driver.FindElement(_magnifierIcon).Click();
-            CloseSecondAd();
+            //CloseSecondAd();
         }
         
         public void ClickCategoryButton()
@@ -194,31 +198,27 @@ namespace Lab11_12
 
 
 
-        public void ChangeRegionToGrodno()
+        public void ChangeRegionToMinsk()
         {
-            Thread.Sleep(3000);
-            driver.FindElement(By.XPath("//*[@id=\"header\"]/div[1]/div[3]/div/button")).Click();
-            driver.FindElement(By.XPath("//*[@id=\"header\"]/div[1]/div[3]/div/div/div/div[1]/div/select")).Click();
-            driver.FindElement(By.XPath("//*[@id=\"header\"]/div[1]/div[3]/div/div/div/div[1]/div/select/option[5]")).Click();
-            driver.FindElement(By.XPath("//*[@id=\"header\"]/div[1]/div[3]/div/div/div/div[2]/div/select")).Click();
-            driver.FindElement(By.XPath("//*[@id=\"header\"]/div[1]/div[3]/div/div/div/div[2]/div/select/option[2]")).Click();
-            driver.FindElement(By.XPath("//*[@id=\"header\"]/div[1]/div[3]/div/div/div/button")).Click();
-            Thread.Sleep(3000);
+            ClosingPolicyAndAdvertisingWindows();
+            driver.FindElement(_regionField).Click();
+            driver.FindElement(_regionList).Click();
+            driver.FindElement(_minskRegionInRegionList).Click();
+            //driver.FindElement(By.XPath("//*[@id=\"header\"]/div[1]/div[3]/div/div/div/div[2]/div/select")).Click();
+            //driver.FindElement(By.XPath("//*[@id=\"header\"]/div[1]/div[3]/div/div/div/div[2]/div/select/option[2]")).Click();
+            driver.FindElement(_acceptRegionButton).Click();
         }
-        public void InputSomeProductInSearch()
+        public void InputSearchVolkswagenT4()
         {
-            Thread.Sleep(3000);
-            driver.FindElement(By.XPath("//*[@id=\"header\"]/div[1]/div[2]/div/div/div/div/input")).Click();
-            driver.FindElement(By.XPath("//*[@id=\"header\"]/div[1]/div[2]/div/div[1]/div/div/input")).SendKeys("дом");
-            Thread.Sleep(3000);
-            driver.FindElement(By.XPath("//*[@id=\"header\"]/div[1]/div[2]/div/div[1]/div/div/button[2]")).Click();
-            Thread.Sleep(3000);
-
+            CloseSecondAd();
+            driver.FindElement(_searchInputField).Click();
+            driver.FindElement(_searchInputField).SendKeys(data.inputSearch);
+            //driver.FindElement(By.XPath("//*[@id=\"header\"]/div[1]/div[2]/div/div[1]/div/div/button[2]")).Click();
         }
 
         public string GetRegionOfProductPage()
         {
-            IWebElement spanElement = driver.FindElement(By.XPath("//*[@id=\"main-content\"]/div[4]/div[1]/div/div/div[2]/div/div/section[1]/a/div[2]/div[2]/p"));
+            IWebElement spanElement = driver.FindElement(By.XPath(""));
             return spanElement.Text;
         }
         public void ClickSignInButton()
@@ -244,6 +244,25 @@ namespace Lab11_12
 
         public string GetSearchResultsName()
         {
+            CloseSecondAd();
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementIsVisible(_searchResultsName));
+            IWebElement spanElement = driver.FindElement(_searchResultsName);
+            return Utils.RemoveQuotes(spanElement.Text);
+        }
+        
+        public string GetNameOfSearchResult()
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementIsVisible(_searchResultsName));
+            IWebElement spanElement = driver.FindElement(_searchResultsName);
+            return Utils.RemoveQuotes(spanElement.Text);
+        }
+        
+        public string GetProductNameFromSearchResult()
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementIsVisible(_searchResultsName));
             IWebElement spanElement = driver.FindElement(_searchResultsName);
             return Utils.RemoveQuotes(spanElement.Text);
         }
