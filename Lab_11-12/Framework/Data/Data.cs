@@ -12,10 +12,8 @@
         public string descriptionColor = "rgba(199, 42, 61, 1)";
         public string searchString = "Трактор";
         public string markName = "Volkswagen";
-        public string badNumber = "3";
         public string region = "Минск";
         public string inputSearch = "Volkswagen T4";
-        public string correctRegionAndFilter = "Товары для ремонта и стройки в Гродно";
         public string correctFilterName = "Продажа Volkswagen";
         public string titleGifts = "Открытки поздравительные. Двойные, цена 3 р. купить в Минске на Куфаре - Объявление №214160074";
     }

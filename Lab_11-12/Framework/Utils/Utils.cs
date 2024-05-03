@@ -1,4 +1,5 @@
-﻿using System.Xml;
+﻿using OpenQA.Selenium;
+using System.Xml;
 
 
 namespace Lab11_12
@@ -6,7 +7,7 @@ namespace Lab11_12
     public class Utils
     {
         
-        public static User GetInfoFromFile()
+        public static User? GetInfoFromFile()
         {
             User user = new User();
             XmlDocument xmlDoc = new XmlDocument();
@@ -15,8 +16,8 @@ namespace Lab11_12
             {
                 xmlDoc.Load("C:\\Users\\Lenovo\\OneDrive\\Рабочий стол\\aweff\\TestSecond\\Input.xml");
 
-                user.username = xmlDoc.SelectSingleNode("/credentials/login").InnerText;
-                user.password = xmlDoc.SelectSingleNode("/credentials/password").InnerText;
+                user.username = xmlDoc?.SelectSingleNode("/credentials/login")?.InnerText;
+                user.password = xmlDoc?.SelectSingleNode("/credentials/password")?.InnerText;
 
                 return user;
             }
@@ -35,6 +36,19 @@ namespace Lab11_12
             string resultStr = input.Replace("«", "");
             resultStr = resultStr.Replace("»", "");
             return resultStr;
+        }
+        
+        public static bool CheckRegionProductName(IList<IWebElement> divElements)
+        {
+            foreach (var element in divElements)
+            {
+                string text = element.Text.ToLower();
+                if (!text.Contains("минск"))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

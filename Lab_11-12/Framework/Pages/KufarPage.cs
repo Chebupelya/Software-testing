@@ -37,6 +37,9 @@ namespace Lab11_12
         private readonly By _regionList = By.XPath("//*[@id=\"header\"]/div[1]/div[3]/div/div/div/div[1]/div/select");
         private readonly By _minskRegionInRegionList = By.XPath("//*[@id=\"header\"]/div[1]/div[3]/div/div/div/div[1]/div/select/option[2]");
         private readonly By _acceptRegionButton = By.XPath("//*[@id=\"header\"]/div[1]/div[3]/div/div/div/button");
+        private readonly By _searchBarInput = By.XPath("//input[@data-testid='searchbar-input']");
+        private readonly By _searchResultRegion = By.CssSelector("div.styles_info__region__BGH1o");
+
 
 
 
@@ -64,13 +67,6 @@ namespace Lab11_12
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             IWebElement acceptButton = wait.Until(ExpectedConditions.ElementIsVisible(_secondAdButton));
             acceptButton.Click();
-        }
-
-        public void ClickLikeButton()
-        {
-            Thread.Sleep(3000);
-            driver.FindElement(By.XPath("//*[@id=\"adview_content\"]/div[1]/div[2]/div[2]/div")).Click();
-            Thread.Sleep(3000);
         }
 
         public void ClickProfileIcon()
@@ -167,6 +163,14 @@ namespace Lab11_12
             driver.FindElement(_categoriesButton).Click();
         }
         
+        public void ChooseCategoryButton()
+        {
+            CloseSecondAd();
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementIsVisible(_categoriesButton));
+            driver.FindElement(_categoriesButton).Click();
+        }
+        
         public void ChooseMicrobusCategory()
         {
             Actions actions = new Actions(driver);
@@ -201,45 +205,39 @@ namespace Lab11_12
         public void ChangeRegionToMinsk()
         {
             ClosingPolicyAndAdvertisingWindows();
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementIsVisible(_regionField));
             driver.FindElement(_regionField).Click();
+            wait.Until(ExpectedConditions.ElementIsVisible(_regionList));
             driver.FindElement(_regionList).Click();
+            wait.Until(ExpectedConditions.ElementIsVisible(_minskRegionInRegionList));
             driver.FindElement(_minskRegionInRegionList).Click();
-            //driver.FindElement(By.XPath("//*[@id=\"header\"]/div[1]/div[3]/div/div/div/div[2]/div/select")).Click();
-            //driver.FindElement(By.XPath("//*[@id=\"header\"]/div[1]/div[3]/div/div/div/div[2]/div/select/option[2]")).Click();
+            wait.Until(ExpectedConditions.ElementIsVisible(_acceptRegionButton));
             driver.FindElement(_acceptRegionButton).Click();
         }
         public void InputSearchVolkswagenT4()
         {
             CloseSecondAd();
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementIsVisible(_searchInputField));
             driver.FindElement(_searchInputField).Click();
             driver.FindElement(_searchInputField).SendKeys(data.inputSearch);
-            //driver.FindElement(By.XPath("//*[@id=\"header\"]/div[1]/div[2]/div/div[1]/div/div/button[2]")).Click();
+        }
+        
+        public void InputSearchBarVolkswagenT4()
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementIsVisible(_searchBarInput));
+            driver.FindElement(_searchBarInput).Click();
+            driver.FindElement(_searchBarInput).SendKeys(data.inputSearch);
         }
 
-        public string GetRegionOfProductPage()
-        {
-            IWebElement spanElement = driver.FindElement(By.XPath(""));
-            return spanElement.Text;
-        }
         public void ClickSignInButton()
         {
             Thread.Sleep(3000);
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             wait.Until(ExpectedConditions.ElementIsVisible(_signInButton));
             driver.FindElement(_signInButton).Click();
-        }
-        
-        public string GetValueField()
-        {
-            IWebElement spanElement = driver.FindElement(By.XPath("//*[@id=\"ai-form\"]/div[4]/p/span"));
-            return spanElement.Text;
-        }
-
-
-        public string GetSeller()
-        {
-            IWebElement spanElement = driver.FindElement(By.XPath("//*[@id=\"ai-form\"]/div[7]/div[1]/span"));
-            return spanElement.Text;
         }
 
         public string GetSearchResultsName()
@@ -278,14 +276,10 @@ namespace Lab11_12
             IWebElement spanElement = driver.FindElement(_searchWithFilterHeader);
             return spanElement.Text;
         }
-        public string GetCorrectFilterAndRegionName()
+        public bool CheckProductRegion()
         {
-            return data.correctRegionAndFilter;
-        }
-        public string GetCurrentFilterAndRegionName()
-        {
-            IWebElement spanElement = driver.FindElement(By.XPath("//*[@id=\"main-content\"]/div[4]/div/div/div/div/h1"));
-            return spanElement.Text;
+            IList<IWebElement> divElements = driver.FindElements(_searchResultRegion);
+            return Utils.CheckRegionProductName(divElements);
         }
     }
 }

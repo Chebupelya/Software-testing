@@ -19,7 +19,6 @@ namespace Lab11_12
 
         User user = UserCreator.UserWitchInfoFromFile();
         Data data = new Data();
-        private Steps steps = new Steps();
 
         [SetUp]
         public void Init()
@@ -93,16 +92,6 @@ namespace Lab11_12
         }
 
         [Test]
-        public void DisplayingProductsBySearchAndBySpecificRegion()
-        {
-            kufarPage.GoToMainPage();
-            kufarPage.ChangeRegionToMinsk();
-            kufarPage.InputSearchVolkswagenT4();
-            kufarPage.ClickMagnifierIcon();
-            string searchResult = kufarPage.GetNameOfSearchResult();
-            Assert.IsTrue(searchResult.Contains(data.region) && searchResult.Contains(data.inputSearch));
-        }
-        [Test]
         public void CheckingTheLowerThresholdForTheNumberOfCharactersInTheDescriptionFieldInAd()
         {
             kufarPage.GoToMainPage();
@@ -142,13 +131,26 @@ namespace Lab11_12
             kufarPage.ClickShowButton();
             Assert.IsTrue(data.correctFilterName == kufarPage.GetCurrentFilterName());
         }
+        
+        [Test]
+        public void DisplayingProductsBySearchAndBySpecificRegion()
+        {
+            kufarPage.GoToMainPage();
+            kufarPage.ChangeRegionToMinsk();
+            kufarPage.InputSearchVolkswagenT4();
+            kufarPage.ClickMagnifierIcon();
+            string searchResult = kufarPage.GetNameOfSearchResult();
+            Assert.IsTrue(searchResult.Contains(data.region) && searchResult.Contains(data.inputSearch));
+        }
+
         [Test]
         public void DisplayingProductsByCategoryAndBySpecificRegion()
         {
-            steps.CloseWarninigAndAdv();
-            //steps.ChangeRegion();
-            //steps.ClickOnFilter();
-            Assert.IsTrue(data.correctRegionAndFilter == steps.GetCurrentFilterAndRegionName());
+            kufarPage.GoToMainPage();
+            kufarPage.ChangeRegionToMinsk();
+            kufarPage.ChooseCategoryButton();
+            kufarPage.ChooseMicrobusCategory();
+            Assert.IsFalse(kufarPage.CheckProductRegion());
         }
     }
 }
