@@ -152,7 +152,6 @@ namespace Lab11_12
         {
             Thread.Sleep(2000);
             driver.FindElement(_magnifierIcon).Click();
-            //CloseSecondAd();
         }
         
         public void ClickCategoryButton()

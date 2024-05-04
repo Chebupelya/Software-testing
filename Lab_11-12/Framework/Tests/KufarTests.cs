@@ -23,11 +23,7 @@ namespace Lab11_12
         [SetUp]
         public void Init()
         {
-
-            if (driver == null)
-            {
-                driver = DriverInstance.GetInstance(DriverInstance.BrowserType.MsEdge);
-            }
+            driver = DriverInstance.GetInstance(DriverInstance.BrowserType.MsEdge);
             driver.Manage().Window.Maximize();
             kufarPage = new KufarPage(driver);
             loginPage = new LoginPage(driver);

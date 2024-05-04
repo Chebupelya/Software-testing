@@ -12,7 +12,6 @@ namespace Lab11_12
         private readonly By _loginField = By.XPath("//*[@id=\"login\"]");
         private readonly By _passwordField = By.XPath("//*[@id=\"password\"]");
         private readonly By _signInSubmitButton = By.XPath("//*[@id=\"__next\"]/div[3]/div/form/div[4]/button");
-        //private readonly By _signInSubmitButton = By.XPath("//form[@data-name='form_login']/div[5]/button");
 
 
         public void Login(User user)
